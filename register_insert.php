@@ -2,9 +2,11 @@
 
 mb_internal_encoding("utf8");
 
-$pdo = new PDO("mysql:dbname=lesson01;host=localhost;","root","root");
+require "DB.php";
+$db = new DB();
+$pdo = $db->connect();
 
-$stmt = $pdo->prepare("insert into login_mypage(name,mail,password,picture,comments)values(?,?,?,?,?)");
+$stmt = $pdo->prepare($db->insert());
 
 $stmt->bindValue(1,$_POST['name']);
 $stmt->bindValue(2,$_POST['mail']);
